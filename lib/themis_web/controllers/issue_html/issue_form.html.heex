@@ -1,0 +1,13 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <%= title_select f, @changeset %>
+  <.input field={f[:number]} type="number" label="Number" />
+  <.input field={f[:is_annual]} type="checkbox" label="Is annual" />
+  <.input field={f[:name]} type="text" label="Name" />
+  <.input field={f[:cover_date]} type="text" label="Cover date" />
+  <:actions>
+    <.button>Save Issue</.button>
+  </:actions>
+</.simple_form>

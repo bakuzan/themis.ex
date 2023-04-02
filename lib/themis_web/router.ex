@@ -20,6 +20,7 @@ defmodule ThemisWeb.Router do
     get "/", PageController, :home
 
     resources "/titles", TitleController
+    resources "/issues", IssueController
   end
 
   # Other scopes may use custom stacks.

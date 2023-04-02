@@ -1,0 +1,27 @@
+<.header>
+  Listing Issues
+  <:actions>
+    <.link href={~p"/issues/new"}>
+      <.button>New Issue</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="issues" rows={@issues} row_click={&JS.navigate(~p"/issues/#{&1}")}>
+  <:col :let={issue} label="Title"><%= issue.title %></:col>
+  <:col :let={issue} label="Number"><%= issue.number %></:col>
+  <:col :let={issue} label="Is annual"><%= issue.is_annual %></:col>
+  <:col :let={issue} label="Name"><%= issue.name %></:col>
+  <:col :let={issue} label="Cover date"><%= issue.cover_date %></:col>
+  <:action :let={issue}>
+    <div class="sr-only">
+      <.link navigate={~p"/issues/#{issue}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/issues/#{issue}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={issue}>
+    <.link href={~p"/issues/#{issue}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

@@ -7,6 +7,8 @@ defmodule Themis.Admin.Catalogue.Title do
     field :name, :string
     field :start_year, :integer
 
+    has_many :issues, Themis.Admin.Catalogue.Issue
+
     timestamps()
   end
 
@@ -15,5 +17,6 @@ defmodule Themis.Admin.Catalogue.Title do
     title
     |> cast(attrs, [:name, :start_year, :is_one_shot])
     |> validate_required([:name, :start_year, :is_one_shot])
+    |> validate_number(:start_year, greater_than_or_equal_to: 1900)
   end
 end

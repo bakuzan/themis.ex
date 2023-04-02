@@ -19,4 +19,21 @@ defmodule Themis.Admin.CatalogueFixtures do
 
     title
   end
+
+  @doc """
+  Generate a issue.
+  """
+  def issue_fixture(attrs \\ %{}) do
+    {:ok, issue} =
+      attrs
+      |> Enum.into(%{
+        cover_date: "some cover_date",
+        is_annual: true,
+        name: "some name",
+        number: 42
+      })
+      |> Themis.Admin.Catalogue.create_issue()
+
+    issue
+  end
 end

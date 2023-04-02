@@ -60,4 +60,64 @@ defmodule Themis.Admin.CatalogueTest do
       assert %Ecto.Changeset{} = Catalogue.change_title(title)
     end
   end
+
+  describe "issues" do
+    alias Themis.Admin.Catalogue.Issue
+
+    import Themis.Admin.CatalogueFixtures
+
+    @invalid_attrs %{cover_date: nil, is_annual: nil, name: nil, number: nil}
+
+    test "list_issues/0 returns all issues" do
+      issue = issue_fixture()
+      assert Catalogue.list_issues() == [issue]
+    end
+
+    test "get_issue!/1 returns the issue with given id" do
+      issue = issue_fixture()
+      assert Catalogue.get_issue!(issue.id) == issue
+    end
+
+    test "create_issue/1 with valid data creates a issue" do
+      valid_attrs = %{cover_date: "some cover_date", is_annual: true, name: "some name", number: 42}
+
+      assert {:ok, %Issue{} = issue} = Catalogue.create_issue(valid_attrs)
+      assert issue.cover_date == "some cover_date"
+      assert issue.is_annual == true
+      assert issue.name == "some name"
+      assert issue.number == 42
+    end
+
+    test "create_issue/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Catalogue.create_issue(@invalid_attrs)
+    end
+
+    test "update_issue/2 with valid data updates the issue" do
+      issue = issue_fixture()
+      update_attrs = %{cover_date: "some updated cover_date", is_annual: false, name: "some updated name", number: 43}
+
+      assert {:ok, %Issue{} = issue} = Catalogue.update_issue(issue, update_attrs)
+      assert issue.cover_date == "some updated cover_date"
+      assert issue.is_annual == false
+      assert issue.name == "some updated name"
+      assert issue.number == 43
+    end
+
+    test "update_issue/2 with invalid data returns error changeset" do
+      issue = issue_fixture()
+      assert {:error, %Ecto.Changeset{}} = Catalogue.update_issue(issue, @invalid_attrs)
+      assert issue == Catalogue.get_issue!(issue.id)
+    end
+
+    test "delete_issue/1 deletes the issue" do
+      issue = issue_fixture()
+      assert {:ok, %Issue{}} = Catalogue.delete_issue(issue)
+      assert_raise Ecto.NoResultsError, fn -> Catalogue.get_issue!(issue.id) end
+    end
+
+    test "change_issue/1 returns a issue changeset" do
+      issue = issue_fixture()
+      assert %Ecto.Changeset{} = Catalogue.change_issue(issue)
+    end
+  end
 end

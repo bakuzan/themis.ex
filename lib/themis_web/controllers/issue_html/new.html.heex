@@ -1,0 +1,8 @@
+<.header>
+  New Issue
+  <:subtitle>Use this form to manage issue records in your database.</:subtitle>
+</.header>
+
+<.issue_form changeset={@changeset} action={~p"/issues"} />
+
+<.back navigate={~p"/issues"}>Back to issues</.back>
