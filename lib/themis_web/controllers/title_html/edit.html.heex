@@ -1,0 +1,8 @@
+<.header>
+  Edit Title <%= @title.id %>
+  <:subtitle>Use this form to manage title records in your database.</:subtitle>
+</.header>
+
+<.title_form changeset={@changeset} action={~p"/titles/#{@title}"} />
+
+<.back navigate={~p"/titles"}>Back to titles</.back>

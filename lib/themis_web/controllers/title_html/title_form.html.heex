@@ -1,0 +1,11 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:name]} type="text" label="Name" />
+  <.input field={f[:start_year]} type="number" label="Start year" />
+  <.input field={f[:is_one_shot]} type="checkbox" label="Is one shot" />
+  <:actions>
+    <.button>Save Title</.button>
+  </:actions>
+</.simple_form>

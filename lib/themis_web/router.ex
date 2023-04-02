@@ -18,6 +18,8 @@ defmodule ThemisWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    resources "/titles", TitleController
   end
 
   # Other scopes may use custom stacks.

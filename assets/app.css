@@ -1,0 +1,9 @@
+.Navbar {
+  padding: 8px 4px;
+}
+
+.Navbar__Inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
