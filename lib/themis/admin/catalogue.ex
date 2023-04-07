@@ -114,7 +114,7 @@ defmodule Themis.Admin.Catalogue do
 
   """
   def list_issues do
-    Issue |> Repo.all |> Repo.preload(:title)
+    Repo.all(from i in Issue, preload: [:title])
   end
 
   @doc """

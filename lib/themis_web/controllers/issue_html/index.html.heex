@@ -8,7 +8,7 @@
 </.header>
 
 <.table id="issues" rows={@issues} row_click={&JS.navigate(~p"/issues/#{&1}")}>
-  <:col :let={issue} label="Title"><%= issue.title %></:col>
+  <:col :let={issue} label="Title"><%= issue.title.name %></:col>
   <:col :let={issue} label="Number"><%= issue.number %></:col>
   <:col :let={issue} label="Is annual"><%= issue.is_annual %></:col>
   <:col :let={issue} label="Name"><%= issue.name %></:col>

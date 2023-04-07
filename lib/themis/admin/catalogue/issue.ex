@@ -18,5 +18,6 @@ defmodule Themis.Admin.Catalogue.Issue do
     issue
     |> cast(attrs, [:number, :is_annual, :name, :cover_date, :title_id])
     |> validate_required([:number, :is_annual, :name, :cover_date, :title_id])
+    |> unique_constraint(:unique_issue, name: :issue_unique_columns)
   end
 end

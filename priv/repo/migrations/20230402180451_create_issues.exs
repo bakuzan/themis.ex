@@ -13,5 +13,6 @@ defmodule Themis.Repo.Migrations.CreateIssues do
     end
 
     create index(:issues, [:title_id])
+    create unique_index(:issues, [:number, :is_annual, :title_id], name: :issue_unique_columns)
   end
 end

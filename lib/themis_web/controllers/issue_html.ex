@@ -11,6 +11,7 @@ defmodule ThemisWeb.IssueHTML do
 
   def issue_form(assigns)
 
+  require Logger
   import Phoenix.HTML.Form
 
   def title_select(f, changeset) do
@@ -23,6 +24,10 @@ defmodule ThemisWeb.IssueHTML do
       for t <- Themis.Admin.Catalogue.list_titles(),
           do: [key: t.name, value: t.id, selected: t.id in existing_ids]
 
-    select(f, :title_id, title_opts)
+    # This doesn't work and I don't know why
+    disable_prompt = 
+      Enum.count(existing_ids) !== 0
+
+    select(f, :title_id, title_opts, prompt: [key: "Choose a title", disabled: disable_prompt])
   end  
 end
