@@ -2,6 +2,8 @@ defmodule Themis.Admin.Catalogue.Issue do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Themis.Admin.Books.Collection
+
   schema "issues" do
     field :cover_date, :string
     field :is_annual, :boolean, default: false
@@ -9,6 +11,7 @@ defmodule Themis.Admin.Catalogue.Issue do
     field :number, :integer
 
     belongs_to :title, Themis.Admin.Catalogue.Title
+    many_to_many :collections, Collection, join_through: "collection_issues", on_replace: :delete  
 
     timestamps()
   end

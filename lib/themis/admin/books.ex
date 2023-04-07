@@ -7,6 +7,7 @@ defmodule Themis.Admin.Books do
   alias Themis.Repo
 
   alias Themis.Admin.Books.Collection
+  alias Themis.Admin.Catalogue.Issue
 
   @doc """
   Returns the list of collections.
@@ -35,7 +36,9 @@ defmodule Themis.Admin.Books do
       ** (Ecto.NoResultsError)
 
   """
-  def get_collection!(id), do: Repo.get!(Collection, id)
+  def get_collection!(id) do 
+    Collection |> Repo.get!(id) |> Repo.preload(:issues)
+  end
 
   @doc """
   Creates a collection.
@@ -51,7 +54,7 @@ defmodule Themis.Admin.Books do
   """
   def create_collection(attrs \\ %{}) do
     %Collection{}
-    |> Collection.changeset(attrs)
+    |> change_collection(attrs)
     |> Repo.insert()
   end
 
@@ -69,7 +72,7 @@ defmodule Themis.Admin.Books do
   """
   def update_collection(%Collection{} = collection, attrs) do
     collection
-    |> Collection.changeset(attrs)
+    |> change_collection(attrs)
     |> Repo.update()
   end
 
@@ -99,6 +102,16 @@ defmodule Themis.Admin.Books do
 
   """
   def change_collection(%Collection{} = collection, attrs \\ %{}) do
-    Collection.changeset(collection, attrs)
+    issues = list_issues_by_id(attrs["issue_ids"])
+
+    collection
+      |> Repo.preload(:issues)
+      |> Collection.changeset(attrs)
+      |> Ecto.Changeset.put_assoc(:issues, issues)      
   end
+
+ def list_issues_by_id(nil), do: []
+ def list_issues_by_id(issue_ids) do
+   Repo.all(from i in Issue, where: i.id in ^issue_ids)
+ end
 end

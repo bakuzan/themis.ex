@@ -12,6 +12,12 @@
   <:item title="Name"><%= @collection.name %></:item>
   <:item title="Publication date"><%= @collection.publication_date %></:item>
   <:item title="Number"><%= @collection.number %></:item>
+  <:item title="Issues">
+   <%= for iss <- @collection.issues do %>
+     <%= iss.name %>
+     <br/>
+   <% end %>
+  </:item>
 </.list>
 
 <.back navigate={~p"/collections"}>Back to collections</.back>

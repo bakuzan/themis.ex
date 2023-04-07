@@ -5,6 +5,9 @@
   <.input field={f[:name]} type="text" label="Name" />
   <.input field={f[:publication_date]} type="number" label="Publication date" />
   <.input field={f[:number]} type="number" label="Number" />
+  <div>
+    <%= issue_select f, @changeset %>
+  </div>
   <:actions>
     <.button>Save Collection</.button>
   </:actions>
