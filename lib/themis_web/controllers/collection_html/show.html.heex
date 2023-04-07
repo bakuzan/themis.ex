@@ -1,0 +1,17 @@
+<.header>
+  Collection <%= @collection.id %>
+  <:subtitle>This is a collection record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/collections/#{@collection}/edit"}>
+      <.button>Edit collection</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @collection.name %></:item>
+  <:item title="Publication date"><%= @collection.publication_date %></:item>
+  <:item title="Number"><%= @collection.number %></:item>
+</.list>
+
+<.back navigate={~p"/collections"}>Back to collections</.back>

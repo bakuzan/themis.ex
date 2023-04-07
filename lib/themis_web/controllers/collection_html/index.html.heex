@@ -1,0 +1,25 @@
+<.header>
+  Listing Collections
+  <:actions>
+    <.link href={~p"/collections/new"}>
+      <.button>New Collection</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="collections" rows={@collections} row_click={&JS.navigate(~p"/collections/#{&1}")}>
+  <:col :let={collection} label="Name"><%= collection.name %></:col>
+  <:col :let={collection} label="Publication date"><%= collection.publication_date %></:col>
+  <:col :let={collection} label="Number"><%= collection.number %></:col>
+  <:action :let={collection}>
+    <div class="sr-only">
+      <.link navigate={~p"/collections/#{collection}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/collections/#{collection}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={collection}>
+    <.link href={~p"/collections/#{collection}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
