@@ -56,4 +56,58 @@ defmodule Themis.Admin.ReadOrdersTest do
       assert %Ecto.Changeset{} = ReadOrders.change_read_order(read_order)
     end
   end
+
+  describe "readorder_issues" do
+    alias Themis.Admin.ReadOrders.ReadOrderIssue
+
+    import Themis.Admin.ReadOrdersFixtures
+
+    @invalid_attrs %{sort_order: nil}
+
+    test "list_readorder_issues/0 returns all readorder_issues" do
+      read_order_issue = read_order_issue_fixture()
+      assert ReadOrders.list_readorder_issues() == [read_order_issue]
+    end
+
+    test "get_read_order_issue!/1 returns the read_order_issue with given id" do
+      read_order_issue = read_order_issue_fixture()
+      assert ReadOrders.get_read_order_issue!(read_order_issue.id) == read_order_issue
+    end
+
+    test "create_read_order_issue/1 with valid data creates a read_order_issue" do
+      valid_attrs = %{sort_order: 42}
+
+      assert {:ok, %ReadOrderIssue{} = read_order_issue} = ReadOrders.create_read_order_issue(valid_attrs)
+      assert read_order_issue.sort_order == 42
+    end
+
+    test "create_read_order_issue/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = ReadOrders.create_read_order_issue(@invalid_attrs)
+    end
+
+    test "update_read_order_issue/2 with valid data updates the read_order_issue" do
+      read_order_issue = read_order_issue_fixture()
+      update_attrs = %{sort_order: 43}
+
+      assert {:ok, %ReadOrderIssue{} = read_order_issue} = ReadOrders.update_read_order_issue(read_order_issue, update_attrs)
+      assert read_order_issue.sort_order == 43
+    end
+
+    test "update_read_order_issue/2 with invalid data returns error changeset" do
+      read_order_issue = read_order_issue_fixture()
+      assert {:error, %Ecto.Changeset{}} = ReadOrders.update_read_order_issue(read_order_issue, @invalid_attrs)
+      assert read_order_issue == ReadOrders.get_read_order_issue!(read_order_issue.id)
+    end
+
+    test "delete_read_order_issue/1 deletes the read_order_issue" do
+      read_order_issue = read_order_issue_fixture()
+      assert {:ok, %ReadOrderIssue{}} = ReadOrders.delete_read_order_issue(read_order_issue)
+      assert_raise Ecto.NoResultsError, fn -> ReadOrders.get_read_order_issue!(read_order_issue.id) end
+    end
+
+    test "change_read_order_issue/1 returns a read_order_issue changeset" do
+      read_order_issue = read_order_issue_fixture()
+      assert %Ecto.Changeset{} = ReadOrders.change_read_order_issue(read_order_issue)
+    end
+  end
 end

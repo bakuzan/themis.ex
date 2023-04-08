@@ -1,0 +1,9 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:sort_order]} type="number" label="Sort order" />
+  <:actions>
+    <.button>Save Read order issue</.button>
+  </:actions>
+</.simple_form>

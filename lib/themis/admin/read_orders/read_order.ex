@@ -5,6 +5,8 @@ defmodule Themis.Admin.ReadOrders.ReadOrder do
   schema "readorders" do
     field :name, :string
 
+    has_many :read_order_issues, Themis.Admin.ReadOrders.ReadOrderIssue
+
     timestamps()
   end
 

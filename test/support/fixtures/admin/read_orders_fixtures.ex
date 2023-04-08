@@ -22,4 +22,18 @@ defmodule Themis.Admin.ReadOrdersFixtures do
 
     read_order
   end
+
+  @doc """
+  Generate a read_order_issue.
+  """
+  def read_order_issue_fixture(attrs \\ %{}) do
+    {:ok, read_order_issue} =
+      attrs
+      |> Enum.into(%{
+        sort_order: 42
+      })
+      |> Themis.Admin.ReadOrders.create_read_order_issue()
+
+    read_order_issue
+  end
 end

@@ -1,0 +1,15 @@
+<.header>
+  Read order issue <%= @read_order_issue.id %>
+  <:subtitle>This is a read_order_issue record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/readorder_issues/#{@read_order_issue}/edit"}>
+      <.button>Edit read_order_issue</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Sort order"><%= @read_order_issue.sort_order %></:item>
+</.list>
+
+<.back navigate={~p"/readorder_issues"}>Back to readorder_issues</.back>

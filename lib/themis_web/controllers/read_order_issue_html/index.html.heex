@@ -1,0 +1,23 @@
+<.header>
+  Listing Readorder issues
+  <:actions>
+    <.link href={~p"/readorder_issues/new"}>
+      <.button>New Read order issue</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="readorder_issues" rows={@readorder_issues} row_click={&JS.navigate(~p"/readorder_issues/#{&1}")}>
+  <:col :let={read_order_issue} label="Sort order"><%= read_order_issue.sort_order %></:col>
+  <:action :let={read_order_issue}>
+    <div class="sr-only">
+      <.link navigate={~p"/readorder_issues/#{read_order_issue}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/readorder_issues/#{read_order_issue}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={read_order_issue}>
+    <.link href={~p"/readorder_issues/#{read_order_issue}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

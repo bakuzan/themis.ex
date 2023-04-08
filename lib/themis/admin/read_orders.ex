@@ -35,7 +35,9 @@ defmodule Themis.Admin.ReadOrders do
       ** (Ecto.NoResultsError)
 
   """
-  def get_read_order!(id), do: Repo.get!(ReadOrder, id)
+  def get_read_order!(id) do
+    ReadOrder |> Repo.get!(id) |> Repo.preload(:read_order_issues)
+  end
 
   @doc """
   Creates a read_order.
@@ -100,5 +102,101 @@ defmodule Themis.Admin.ReadOrders do
   """
   def change_read_order(%ReadOrder{} = read_order, attrs \\ %{}) do
     ReadOrder.changeset(read_order, attrs)
+  end
+
+  alias Themis.Admin.ReadOrders.ReadOrderIssue
+
+  @doc """
+  Returns the list of readorder_issues.
+
+  ## Examples
+
+      iex> list_readorder_issues()
+      [%ReadOrderIssue{}, ...]
+
+  """
+  def list_readorder_issues do
+    Repo.all(ReadOrderIssue)
+  end
+
+  @doc """
+  Gets a single read_order_issue.
+
+  Raises `Ecto.NoResultsError` if the Read order issue does not exist.
+
+  ## Examples
+
+      iex> get_read_order_issue!(123)
+      %ReadOrderIssue{}
+
+      iex> get_read_order_issue!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_read_order_issue!(id), do: Repo.get!(ReadOrderIssue, id)
+
+  @doc """
+  Creates a read_order_issue.
+
+  ## Examples
+
+      iex> create_read_order_issue(%{field: value})
+      {:ok, %ReadOrderIssue{}}
+
+      iex> create_read_order_issue(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_read_order_issue(attrs \\ %{}) do
+    %ReadOrderIssue{}
+    |> ReadOrderIssue.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a read_order_issue.
+
+  ## Examples
+
+      iex> update_read_order_issue(read_order_issue, %{field: new_value})
+      {:ok, %ReadOrderIssue{}}
+
+      iex> update_read_order_issue(read_order_issue, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_read_order_issue(%ReadOrderIssue{} = read_order_issue, attrs) do
+    read_order_issue
+    |> ReadOrderIssue.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a read_order_issue.
+
+  ## Examples
+
+      iex> delete_read_order_issue(read_order_issue)
+      {:ok, %ReadOrderIssue{}}
+
+      iex> delete_read_order_issue(read_order_issue)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_read_order_issue(%ReadOrderIssue{} = read_order_issue) do
+    Repo.delete(read_order_issue)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking read_order_issue changes.
+
+  ## Examples
+
+      iex> change_read_order_issue(read_order_issue)
+      %Ecto.Changeset{data: %ReadOrderIssue{}}
+
+  """
+  def change_read_order_issue(%ReadOrderIssue{} = read_order_issue, attrs \\ %{}) do
+    ReadOrderIssue.changeset(read_order_issue, attrs)
   end
 end
