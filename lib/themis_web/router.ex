@@ -22,6 +22,7 @@ defmodule ThemisWeb.Router do
     resources "/titles", TitleController
     resources "/issues", IssueController
     resources "/collections", CollectionController
+    resources "/readorders", ReadOrderController
   end
 
   # Other scopes may use custom stacks.

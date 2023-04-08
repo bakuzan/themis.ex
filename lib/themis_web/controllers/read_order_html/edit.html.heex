@@ -1,0 +1,8 @@
+<.header>
+  Edit Read order <%= @read_order.id %>
+  <:subtitle>Use this form to manage read_order records in your database.</:subtitle>
+</.header>
+
+<.read_order_form changeset={@changeset} action={~p"/readorders/#{@read_order}"} />
+
+<.back navigate={~p"/readorders"}>Back to readorders</.back>

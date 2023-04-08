@@ -1,0 +1,23 @@
+<.header>
+  Listing Readorders
+  <:actions>
+    <.link href={~p"/readorders/new"}>
+      <.button>New Read order</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="readorders" rows={@readorders} row_click={&JS.navigate(~p"/readorders/#{&1}")}>
+  <:col :let={read_order} label="Name"><%= read_order.name %></:col>
+  <:action :let={read_order}>
+    <div class="sr-only">
+      <.link navigate={~p"/readorders/#{read_order}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/readorders/#{read_order}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={read_order}>
+    <.link href={~p"/readorders/#{read_order}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
